@@ -1,32 +1,52 @@
-import React, { FC, memo } from "react";
+import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import { Country } from "../../types";
+import { URL } from "../../constants";
+
 import s from "./CountriesList.module.css";
 
-interface CountriesListProps {
-  countries: Country[];
-  setSelectedCountry: (country: Country) => void;
-}
+export const CountriesList = () => {
+  const [countries, setCountries] = useState<Country[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
-const arePropsEqual = (
-  oldProps: CountriesListProps,
-  newProps: CountriesListProps
-) => {
-  return JSON.stringify(oldProps) === JSON.stringify(newProps);
+  useEffect(() => {
+    const getCounties = async () => {
+      try {
+        const response = await fetch(`${URL}/all`);
+
+        if (response.ok) {
+          const data = await response.json();
+          setCountries(data);
+        } else {
+          const json = await response.json();
+          setError(json.message);
+        }
+      } catch (error) {
+        console.error(`Error fetching data: ${error}`);
+        setError("Error fetching data");
+      }
+    };
+
+    getCounties();
+  }, []);
+
+  if (error) return <>{error}</>;
+
+  return (
+    <div>
+      <h1>List of Countries</h1>
+      <ul className={s.countriesList}>
+        {countries.map(({ ccn3, name }) => {
+          return (
+            <li key={ccn3} className={s.countriesListItem}>
+              <NavLink
+                className={s.navLink}
+                to={`country/${name.common}`}
+              >{`${name.common}`}</NavLink>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
 };
-
-export const CountriesList: FC<CountriesListProps> = memo(
-  ({ countries, setSelectedCountry }) => (
-    <ul className={s.countriesList}>
-      {countries.map((country) => {
-        return (
-          <li
-            key={country.ccn3}
-            className={s.countriesListItem}
-            onClick={() => setSelectedCountry(country)}
-          >{`${country.name.common}`}</li>
-        );
-      })}
-    </ul>
-  ),
-  arePropsEqual
-);

@@ -1,12 +1,15 @@
 .country {
+  padding: 20px;
+  border: 1px solid #ccccccaa;
   border-radius: 18px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   box-shadow: 0px 10px 13px -4px rgba(35, 35, 95, 0.19);
 }
-.country:hover {
-  cursor: pointer;
+.countryName {
+  padding: 12px 18px 18px;
+  color: #39414b;
 }
 .countryImageWrapper {
   display: flex;
@@ -16,8 +19,4 @@
 .countryImage {
   width: auto;
   height: 162px;
-}
-.countryName {
-  padding: 12px 18px 18px;
-  color: #39414b;
 }

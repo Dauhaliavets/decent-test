@@ -1,8 +1,10 @@
 .countriesList {
+  display: flex;
+  flex-wrap: wrap;
   list-style: none;
-  padding: 12px;
 }
 .countriesListItem {
+  flex-basis: 25%;
   padding: 12px;
   border-radius: 12px;
   color: #39414b;
@@ -19,4 +21,9 @@
 }
 .countriesListItem.active:hover {
   background-color: #58b06e;
+}
+
+.navLink {
+  display: block;
+  text-decoration: none;
 }

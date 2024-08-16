@@ -1,3 +1,3 @@
-const URL = "https://restcountries.com/v3.1/all";
+const URL = "https://restcountries.com/v3.1";
 
 export { URL };
