@@ -1,0 +1,22 @@
+.countriesList {
+  list-style: none;
+  padding: 12px;
+}
+.countriesListItem {
+  padding: 12px;
+  border-radius: 12px;
+  color: #39414b;
+  background-color: #ffffff;
+  transition: background-color 0.2s linear;
+}
+.countriesListItem:hover {
+  cursor: pointer;
+  background-color: #eeeeee;
+}
+.countriesListItem.active {
+  color: #ffffff;
+  background-color: #5fbf77;
+}
+.countriesListItem.active:hover {
+  background-color: #58b06e;
+}
